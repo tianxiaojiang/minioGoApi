@@ -18,7 +18,6 @@ type Minio struct {
 	SecretKey string `mapstructure:"secretkey" json:"secretkey" yaml:"secretkey"`
 	Endpoint  string `mapstructure:"endpoint" json:"endpoint" yaml:"endpoint"`
 	UseSSL    bool   `mapstructure:"usessl" json:"usessl" yaml:"usessl"`
-	Bucket    string `mapstructure:"bucket" json:"bucket" yaml:"bucket"`
 }
 
 var Conf = new(Config)

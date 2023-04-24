@@ -4,7 +4,7 @@ app:
   port: 8080
   appname: storeObj
   appurl: http://127.0.0.1:8080
-  signkey: marttinTian
+  signkey: abcdefg
 
 minio:
   accesskey: "UBw1kTHcmaVHollU"
