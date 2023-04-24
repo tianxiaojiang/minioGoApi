@@ -1,0 +1,14 @@
+# 基本
+app:
+  env: local
+  port: 8080
+  appname: storeObj
+  appurl: http://127.0.0.1:8080
+  signkey: marttinTian
+
+minio:
+  accesskey: "UBw1kTHcmaVHollU"
+  secretkey: "mjzgkdJWBKLGpSSsfYbaJU5C6tCZOg6I"
+  endpoint: "127.0.0.1:9000"
+  usessl: false
+  bucket: "seller-api"
