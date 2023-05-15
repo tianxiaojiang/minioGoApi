@@ -19,8 +19,8 @@ func main() {
 
 	router.Use(handler.Auth())
 
-	// 文件上传
-	router.PUT("/:bucket", action.UploadEndpoint)
+	// 文件上传, 为了兼容小程序，使用POST
+	router.POST("/:bucket", action.UploadEndpoint)
 
 	// 文件读取
 	router.GET("/:bucket/:filename", action.GetEndpoint)
