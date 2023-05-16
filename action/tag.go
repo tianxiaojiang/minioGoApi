@@ -20,25 +20,9 @@ func TagEndpoint(c *gin.Context) {
 	// 要设置的tag value
 	tagVal := c.Query("tv")
 
-	gconfig := global.Conf
-	minioClient := minioClient.Init(gconfig)
-
 	fmt.Printf("tagkey: %s, tagval: %s", tagKey, tagVal)
 
-	tags, err := tags.NewTags(map[string]string{
-		tagKey: tagVal,
-	}, true)
-
-	if err != nil {
-		c.JSON(500, gin.H{
-			"code": -1,
-			"msg":  err.Error(),
-			"data": nil,
-		})
-		return
-	}
-
-	err = minioClient.PutObjectTagging(context.Background(), bucketName, objName, tags, minio.PutObjectTaggingOptions{})
+	err := TagObj(bucketName, objName, tagKey, tagVal)
 	if err != nil {
 		c.JSON(500, gin.H{
 			"code": -1,
@@ -53,4 +37,25 @@ func TagEndpoint(c *gin.Context) {
 		"msg":  "ok",
 		"data": nil,
 	})
+}
+
+func TagObj(bucketName string, objName string, tagKey string, tagVal string) (err error) {
+
+	gconfig := global.Conf
+	minioClient := minioClient.Init(gconfig)
+
+	tags, err := tags.NewTags(map[string]string{
+		tagKey: tagVal,
+	}, true)
+
+	if err != nil {
+		return
+	}
+
+	err = minioClient.PutObjectTagging(context.Background(), bucketName, objName, tags, minio.PutObjectTaggingOptions{})
+	if err != nil {
+		return
+	}
+
+	return
 }
