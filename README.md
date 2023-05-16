@@ -1,12 +1,19 @@
 
 ### 向 minio-server 访问图片的api
 
-使用gin框架，实现上传、读取、删除三个接口
+使用gin框架，实现上传、读取、删除、打标签四个接口
 
 - [PUT]/:bucket
 - [GET]/:bucket/:file
 - [DELETE]/:bucket/:file
+- [PTCH]/:bucket/:file
 
+调用说明：
+
+上传：{{host}}/{{bucketName}}, contentType:form-data, 上传文件名: upload    
+读取： {{host}}/{{bucketName}}{{fileName}}  
+删除： {{host}}/{{bucketName}}{{fileName}}  
+打标签： {{host}}/{{bucketName}}{{fileName}}?tk={{tagName}}&tv={{tagValue}}    
 
 ### 使用步骤
 
