@@ -28,5 +28,8 @@ func main() {
 	// 文件删除
 	router.DELETE("/:bucket/:filename", action.DelEndpoint)
 
+	// 对象打标签 tk=:tagname&tv=:tagvalue
+	router.PATCH("/:bucket/:filename", action.TagEndpoint)
+
 	router.Run(":" + global.Conf.App.Port)
 }

@@ -10,8 +10,10 @@ EXECUTABLE := minio-api-bin
 # 默认目标
 all: build
 
-# 编译可执行文件
-build: $(BUILD_DIR)/$(EXECUTABLE)
 
-$(BUILD_DIR)/$(EXECUTABLE): $(SOURCE_FILES)
-	GOOS=linux GOARCH=amd64 go build -o $@
+# 编译可执行文件。依赖于目标文件
+build: before
+	GOOS=linux GOARCH=amd64 go build -o $(BUILD_DIR)/$(EXECUTABLE)
+
+before: $(BUILD_DIR)/$(EXECUTABLE)
+	rm -rf $(BUILD_DIR)/$(EXECUTABLE)

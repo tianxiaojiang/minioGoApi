@@ -16,20 +16,28 @@ func Auth() gin.HandlerFunc {
 
 		// get header sign
 		sign := c.GetHeader("sign")
+		// 如果头信息里没有，取url的参数
+		if sign == "" {
+			sign, _ = c.GetQuery("sign")
+		}
 
 		// 检查timestamp是否存在
 		timeStr := c.GetHeader("timestamp")
+		if timeStr == "" {
+			timeStr, _ = c.GetQuery("timestamp")
+		}
+
 		timeInt, err := strconv.ParseInt(timeStr, 10, 64)
 		if err != nil {
-			c.Data(403, "plain/text", []byte("timestamp error"))
+			c.Data(403, "plain/text", []byte("timestamp error."))
 			c.Abort()
 			return
 		}
 		timeStampT := time.Unix(timeInt, 0)
 
 		// 时间戳与服务端相差不超过10s
-		if t.Sub(timeStampT).Seconds() > 10 || timeStampT.Sub(t).Seconds() > 10 {
-			c.Data(403, "plain/text", []byte("timestamp error"))
+		if t.Sub(timeStampT).Seconds() > 15 || timeStampT.Sub(t).Seconds() > 15 {
+			c.Data(403, "plain/text", []byte("timestamp error."))
 			c.Abort()
 			return
 		}

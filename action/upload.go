@@ -61,7 +61,14 @@ func upload(file *multipart.FileHeader, bucketName string) (ret string, err erro
 	}
 	defer fileReader.Close()
 
-	// fmt.Println(minioClient)
+	// 打上标签 status => init
+	// 标签值约定：init 初始化上传、confirm 业务确认使用
+	// 		init 生命周期只有3天
+	// 		confirm 生命周期不限
+	// 业务确认使用时，删除此标签。生命周期则不限
+	userTags := map[string]string{
+		"status": "init",
+	}
 
 	// return
 	uploadInfo, err := minioClient.PutObject(
@@ -71,8 +78,9 @@ func upload(file *multipart.FileHeader, bucketName string) (ret string, err erro
 		fileReader,
 		file.Size,
 		minio.PutObjectOptions{
-			ContentType: "application/octet-stream",
-			// ContentType: contentType,
+			// ContentType: "application/octet-stream",
+			UserTags:    userTags,
+			ContentType: file.Header.Get("ContentType"),
 		})
 
 	if err != nil {
