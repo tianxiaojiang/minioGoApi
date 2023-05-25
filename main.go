@@ -17,6 +17,8 @@ func main() {
 
 	router := gin.New()
 
+	router.Use(gin.Logger())
+
 	router.Use(handler.Auth())
 
 	// 文件上传, 为了兼容小程序，使用POST
