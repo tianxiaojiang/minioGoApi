@@ -17,7 +17,7 @@
 
 ### 使用步骤
 
-- 编译
+- 编译说明
 
 在当前目录下执行命令```make```, 会将源码编译成二进制文件,位于 ```/Users/matin/projects/test/Docker/MinIO/service/api/bin```
 
