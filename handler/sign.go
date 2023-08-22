@@ -36,10 +36,12 @@ func Auth() gin.HandlerFunc {
 		timeStampT := time.Unix(timeInt, 0)
 
 		// 时间戳与服务端相差不超过10s
+		// 暂时不校验时间，方便缓存
 		if t.Sub(timeStampT).Seconds() > 15 || timeStampT.Sub(t).Seconds() > 15 {
-			c.Data(403, "plain/text", []byte("timestamp error."))
-			c.Abort()
-			return
+			// c.Data(403, "plain/text", []byte("timestamp error."))
+			// c.Abort()
+			// return
+			err = nil
 		}
 
 		// 检查签名是否正确

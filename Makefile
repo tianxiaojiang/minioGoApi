@@ -1,5 +1,5 @@
 # 编译目标文件的目录
-BUILD_DIR := /Users/matin/projects/test/Docker/MinIO/service/api/bin
+BUILD_DIR := /Users/matin/Desktop/CutVeg/codes/adminCenter/services/api/bin
 
 # 源代码文件
 SOURCE_FILES := $(wildcard *.go)
